@@ -71,7 +71,7 @@ export var isLeaf = function (node) {
 };
 export var isParentOfLeaf = function (node) {
     if (node.hasChildNodes() && node.nodeName !== 'svg') {
-        return Array.from(node.childNodes).filter(function (child) { return !isLeaf(child); }).length === 0;
+        return (Array.from(node.childNodes).filter(function (child) { return !isLeaf(child); }).length === 0);
     }
     return false;
 };
@@ -209,7 +209,7 @@ export var getMarkIndex = function (node) {
             // @TODO 取data-index作为值，后期将会删除
             node.getAttribute(GROWING_CDP_INDEX);
         if (markIndex) {
-            if (/^\d{1, 10}$/.test(markIndex) && +markIndex !== 0 && +markIndex < 2147483647) {
+            if (/^\d{1,10}$/.test(markIndex) && +markIndex > 0 && +markIndex < 2147483647) {
                 return +markIndex;
             }
             else {
