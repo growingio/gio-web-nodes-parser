@@ -1,0 +1,22 @@
+{
+  "name": "gio-web-nodes-parser",
+  "version": "1.0.0",
+  "description": "Library of parsing nodes used by GrowingIO web SDK",
+  "main": "./es/index.js",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "unpkg": "./build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/growingio/gio-web-nodes-parser.git"
+  },
+  "author": "GrowingIO",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/growingio/gio-web-nodes-parser/issues"
+  },
+  "homepage": "https://github.com/growingio/gio-web-nodes-parser#readme"
+}
