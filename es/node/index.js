@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -13,32 +14,20 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-import BaseNode from './base-node';
-import { getElementHref } from './href';
-import { getElementContent } from './content';
-import { computeXpath } from './utils';
-var VNode = /** @class */ (function (_super) {
+Object.defineProperty(exports, "__esModule", { value: true });
+var base_node_1 = __importDefault(require("./base-node"));
+var href_1 = require("./href");
+var content_1 = require("./content");
+var utils_1 = require("./utils");
+var VNode = (function (_super) {
     __extends(VNode, _super);
     function VNode(node) {
         var _this = _super.call(this, node) || this;
         _this.node = node;
-        var _a = __read(computeXpath(_this), 3), fullXpath = _a[0], xpath = _a[1], skeleton = _a[2];
+        var _a = (0, utils_1.computeXpath)(_this), fullXpath = _a[0], xpath = _a[1], skeleton = _a[2];
         _this.fullXpath = fullXpath;
         _this.xpath = xpath;
         _this.skeleton = skeleton;
@@ -46,18 +35,18 @@ var VNode = /** @class */ (function (_super) {
     }
     Object.defineProperty(VNode.prototype, "href", {
         get: function () {
-            return getElementHref(this.node);
+            return (0, href_1.getElementHref)(this.node);
         },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(VNode.prototype, "content", {
         get: function () {
-            return getElementContent(this.node);
+            return (0, content_1.getElementContent)(this.node);
         },
         enumerable: false,
         configurable: true
     });
     return VNode;
-}(BaseNode));
-export default VNode;
+}(base_node_1.default));
+exports.default = VNode;

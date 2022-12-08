@@ -1,3 +1,4 @@
+"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -9,10 +10,14 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import { UNSUPPORTED_CLICK_TAGS } from './utils/constant';
-import { clickableInput, depthInside, findParent, getEffectiveNode, isContainerTag, isIgnore, isRootNode } from './node/utils';
-import VNode from './node';
-var GioNode = /** @class */ (function () {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var constant_1 = require("./utils/constant");
+var utils_1 = require("./node/utils");
+var node_1 = __importDefault(require("./node"));
+var GioNode = (function () {
     function GioNode(origin, action, direct) {
         if (action === void 0) { action = null; }
         if (direct === void 0) { direct = true; }
@@ -23,10 +28,10 @@ var GioNode = /** @class */ (function () {
             this.target = origin;
         }
         else {
-            this.target = getEffectiveNode(origin);
+            this.target = (0, utils_1.getEffectiveNode)(origin);
         }
-        this.ignore = isIgnore(this.target);
-        this.vnode = new VNode(this.target);
+        this.ignore = (0, utils_1.isIgnore)(this.target);
+        this.vnode = new node_1.default(this.target);
         this.tagName = this.vnode.tagName;
     }
     Object.defineProperty(GioNode.prototype, "content", {
@@ -44,22 +49,16 @@ var GioNode = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(GioNode.prototype, "index", {
-        /**
-         * 获取元素自己的index
-         */
         get: function () {
             return this.vnode.index;
         },
         enumerable: false,
         configurable: true
     });
-    /**
-     * 推断父元素的index
-     */
     GioNode.prototype.inferParentIndex = function () {
         var _this = this;
         if (!this.parentIndex) {
-            findParent(this.target, function (node) {
+            (0, utils_1.findParent)(this.target, function (node) {
                 var gn = new GioNode(node, _this.action, false);
                 if (gn.traceable() && gn.index) {
                     _this.parentIndex = gn.index;
@@ -89,10 +88,6 @@ var GioNode = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    /**
-     * 获取当前节点的信息
-     * @param inferIndex 是否推断父级index，默认true
-     */
     GioNode.prototype.info = function (inferIndex) {
         if (inferIndex === void 0) { inferIndex = true; }
         inferIndex && this.inferParentIndex();
@@ -105,24 +100,19 @@ var GioNode = /** @class */ (function () {
             index: this.parentIndex || this.index
         };
     };
-    /**
-     * 判断是不是可追踪的
-     */
     GioNode.prototype.traceable = function () {
         if (this.ignore) {
             return false;
         }
         if (this.direct) {
             if (this.action === 'click' || this.action === 'hover') {
-                if (UNSUPPORTED_CLICK_TAGS.indexOf(this.target.tagName) !== -1) {
+                if (constant_1.UNSUPPORTED_CLICK_TAGS.indexOf(this.target.tagName) !== -1) {
                     return false;
                 }
-                // 不是可点击的input
-                if (this.target.tagName === 'INPUT' && !clickableInput(this.target)) {
+                if (this.target.tagName === 'INPUT' && !(0, utils_1.clickableInput)(this.target)) {
                     return false;
                 }
-                // 如div，内部深度大于5
-                if (!isContainerTag(this.target) && !depthInside(this.target, 5)) {
+                if (!(0, utils_1.isContainerTag)(this.target) && !(0, utils_1.depthInside)(this.target, 5)) {
                     return false;
                 }
             }
@@ -130,9 +120,6 @@ var GioNode = /** @class */ (function () {
         }
         return this.vnode.container;
     };
-    /**
-     * 冒泡获取所有可追踪的节点
-     */
     GioNode.prototype.trackNodes = function () {
         if (!this.traceable()) {
             return [];
@@ -161,12 +148,9 @@ var GioNode = /** @class */ (function () {
         });
     };
     Object.defineProperty(GioNode.prototype, "parentElement", {
-        /**
-         * 获取父节点
-         */
         get: function () {
             var parent = this.target.parentNode;
-            if (parent && parent.nodeName && !isRootNode(parent)) {
+            if (parent && parent.nodeName && !(0, utils_1.isRootNode)(parent)) {
                 return new GioNode(parent, this.action, false);
             }
             return undefined;
@@ -176,4 +160,4 @@ var GioNode = /** @class */ (function () {
     });
     return GioNode;
 }());
-export default GioNode;
+exports.default = GioNode;
