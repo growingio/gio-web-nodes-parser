@@ -168,12 +168,12 @@ var getMarkIndex = function (node) {
             node.getAttribute(constant_1.GROWING_INDEX_OLD) ||
             node.getAttribute(constant_1.GROWING_CDP_INDEX);
         if (markIndex) {
-            if (/^\d{1,10}$/.test(markIndex) && +markIndex > 0 && +markIndex < 2147483647) {
+            if (/^\d{1,10}$/.test(markIndex) && +markIndex >= 0 && +markIndex < 2147483647) {
                 return +markIndex;
             }
             else {
                 !false &&
-                    window.console.error('[GioNode]：标记的index不符合规范（index必须是大于0且小于2147483647的整数字）。', markIndex);
+                    window.console.error('[GioNode]：标记的index不符合规范（index必须是大于等于0且小于2147483647的整数字）。', markIndex);
             }
         }
     }
