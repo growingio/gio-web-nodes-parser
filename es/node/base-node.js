@@ -106,7 +106,8 @@ var BaseNode = (function () {
     });
     Object.defineProperty(BaseNode.prototype, "index", {
         get: function () {
-            return (0, utils_2.getMarkIndex)(this.node) || this._index;
+            var _a;
+            return (_a = (0, utils_2.getMarkIndex)(this.node)) !== null && _a !== void 0 ? _a : this._index;
         },
         enumerable: false,
         configurable: true
