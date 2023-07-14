@@ -1,3 +1,4 @@
+export declare const niceTry: (fn: Function) => any;
 export declare const isNil: (o: any) => boolean;
 export declare const isNumber: (o: any) => boolean;
 export declare const isBoolean: (o: any) => boolean;
