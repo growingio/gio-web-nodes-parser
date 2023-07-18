@@ -1,8 +1,9 @@
 {
   "name": "gio-web-nodes-parser",
-  "version": "2.0.0-rc.3",
+  "version": "2.0.0-rc.4",
   "description": "Library of parsing nodes used by GrowingIO web SDK",
   "main": "./build/index.js",
+  "module": "./build/index.js",
   "types": "./build/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

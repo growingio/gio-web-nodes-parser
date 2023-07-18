@@ -38,7 +38,7 @@ export interface XNODE {
     viewStatus?: 'IN_SHOW' | 'IN_COVERED' | 'OUT';
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
 }
-export interface GIONODEINFO {
+export interface GIOWEBNODEINFO {
     xpath: string;
     fullXpath: string;
     skeleton: string;
@@ -50,7 +50,7 @@ export interface GIONODEINFO {
     hyperlink?: Possible<string>;
     peerNodes?: Possible<any[]>;
 }
-export interface GIOHYBRIDNODEINFO extends GIONODEINFO {
+export interface GIOHYBRIDNODEINFO extends GIOWEBNODEINFO {
     top: number;
     left: number;
     width: number;
@@ -60,14 +60,14 @@ export interface GIOHYBRIDNODEINFO extends GIONODEINFO {
     href?: Possible<string>;
     parentXPath?: Possible<string>;
 }
-export interface GIONODE {
+export interface GIOWEBNODE {
     originElement: Element;
     actionType: ACTIONTYPES;
     xpathThreshold: number;
     xNode: XNODE;
     trackable: (targetElement: any) => boolean;
-    trackNodes: () => GIONODEINFO[];
-    getGioNodeInfo: (node: XNODE) => GIONODEINFO;
+    trackNodes: () => GIOWEBNODEINFO[];
+    getGioNodeInfo: (node: XNODE) => GIOWEBNODEINFO;
     computeXpath: (xNode: XNODE) => any;
 }
 export interface GIOHYBRIDNODE {

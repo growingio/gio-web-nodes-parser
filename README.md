@@ -1,98 +1,125 @@
 # gio-web-nodes-parser
 
-Library of parsing nodes used by GrowingIO WebJS SDK
+## 安装
 
-GrowingIO WebJS SDK 使用的解析页面节点的库。
-
-### 安装
-
-```
-npm install --save @gio/node
+```bash
+npm install --save gio-web-nodes-parser
 ```
 
-### 使用方式
+## Web 端/圈选使用
 
+```js
+import { GioWebNode } from 'gio-web-nodes-parser';
+
+const gioWebNode: GIOWEBNODE = new GioNode(elementNode, actionType);
 ```
-new GioNode(element [, actionType [, directInteract]])
-```
 
-参数
+### 参数
 
-| 参数           | 类型                                         | 必选 | 默认值 | 说明                         |
-| -------------- | -------------------------------------------- | ---- | ------ | ---------------------------- |
-| element        | Element                                      | √    | 无     | 元素节点                     |
-| actionType     | 'click' \| 'change' \| 'submit' \| 'heatmap' | ×    | 无     | 当前响应事件类型             |
-| directInteract | boolean                                      | ×    | false  | 是否直接交互（触发事件）节点 |
-
-actionType取值heatmap时，不会自动向上查找有效父元素，直接获取当前元素信息
-
-### 属性
-
-##### parentElement
-
-​ 获取父节点
-
-##### ignore
-
-​ 节点是否标记了忽略，存在`data-growing-ignore=true`
-
-##### origin
-
-​ 原始节点
-
-##### **target**
-
-​ 计算后的目标节点
-
-##### fullXpath
-
-​ 完整的xpath，不进行截取的
-
-##### xpath
-
-​ 截取后的xpath
-
-##### **skeleton**
-
-​ 完整的xpath骨架
-
-##### **info**
-
-​ 节点的信息，形如
-
-````javascript
-{
-  index: '1',
-  href: 'https://growingio.com',
-  content: '元素内容',
-  xpath: '/div.item/div#ctx/span/a',
-  fullXpath: '/div.body/div.item/div#ctx/span/a',
-  skeleton: '/div/div/div/span/a'
-}
-````
+| 参数        | 类型                                                  | 必选 | 默认值 | 说明             |
+|-------------|-------------------------------------------------------|------|-------|----------------|
+| elementNode | Element                                               | √    | 无     | 元素节点         |
+| actionType  | 'click' \| 'change' \| 'circleClick' \| 'circleHover' | √    | 无     | 当前响应事件类型 |
 
 ### 方法
 
-##### **traceable**
+#### trackNodes() => GIOWEBNODEINFO[]
 
-`node.traceable`
+获取事件节点信息（actionType 为 click 时，会向上冒泡查找符合条件的容器节点信息）
 
-​ 判断当前节点应不应该被追踪，返回true|false
+```js
+gioWebNode.trackNodes();
+```
 
-##### trackInfos
+### 返回属性
 
-`node.rackInfos()`
+#### xpath: string 截取后的 xpath
 
-​ 冒泡获取所有可追踪的节点信息
+#### fullXpath: string 完整的 xpath
 
-##### actions
+#### skeleton: string 完整的 xpath 骨架
 
-`node.actions()`
+#### xcontent: string 最后 4 层样式+id
 
-​ 获取当前节点可支持的事件列表，值包括`clck`,`chng`,`sbmt`
+#### outFlow: boolean 真实节点是否脱离文档流
 
-##### circledElement
+#### triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE' 节点触发的事件类型
 
-`node.circledElement()`
+#### content?: Possible<string> 元素内容
 
-​ 根据当前元素返回可圈选的元素
+#### index?: Possible<number> 相对位置
+
+#### hyperlink?: Possible<string> 元素链接
+
+#### peerNodes?: Possible<any[]> 同结构的兄弟节点
+
+### Hybrid端使用
+
+```js
+import { GioHybridNode } from 'gio-web-nodes-parser';
+
+const gioHybridNode: GIOHYBRIDNODE = new GioHybridNode({
+  webviewLeft,
+  webviewTop,
+  webviewWidth,
+  webviewHeight,
+  webviewZLevel
+});
+```
+
+### 参数
+
+| 参数       | 类型                                                              | 必选 | 默认值 | 说明     |
+|------------|-------------------------------------------------------------------|------|-------|--------|
+| deviceInfo | { webviewLeft,webviewTop,webviewWidth,webviewHeight,webviewZLevel } | √    | 无     | 设备信息 |
+
+### 方法
+
+#### trackNodes() => GIOHYBRIDNODEINFO[]
+
+获取指定根节点下所有可圈选节点信息
+
+```js
+const elements = gioHybridNode.trackNodes(root ?? document.body, {
+  isContainer: false,
+  zLevel: 0
+});
+```
+
+### 返回属性
+
+#### xpath: string 截取后的 xpath
+
+#### fullXpath: string 完整的 xpath
+
+#### skeleton: string 完整的 xpath 骨架
+
+#### xcontent: string 最后 4 层样式+id
+
+#### outFlow: boolean 真实节点是否脱离文档流
+
+#### triggerEvent: 'VIEW_CLICK' \| 'VIEW_CHANGE' 节点触发的事件类型
+
+#### content?: Possible\<string\> 元素内容
+
+#### index?: Possible\<number\> 相对位置
+
+#### hyperlink?: Possible\<string\> 元素链接
+
+#### peerNodes?: Possible\<any[]\> 同结构的兄弟节点
+
+#### top: number 节点矩位置信息
+
+#### left: number 节点矩位置信息
+
+#### width: number 节点矩位置信息
+
+#### height: number 节点矩位置信息
+
+#### zLevel: number 节点层级信息
+
+#### nodeType: string 节点事件触发类型/节点标签名
+
+#### href?: Possible\<string\> 元素链接
+
+#### parentXPath?: Possible\<string\> 父级xpath

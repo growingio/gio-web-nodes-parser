@@ -1,4 +1,4 @@
-import { ACTIONTYPES, GIONODEINFO, XNODE } from './typings';
+import { ACTIONTYPES, GIOWEBNODEINFO, XNODE } from './typings';
 declare class GioWebNode {
     origin: any;
     action?: ACTIONTYPES;
@@ -11,7 +11,7 @@ declare class GioWebNode {
     constructor(origin: any, action?: ACTIONTYPES, lengthThreshold?: number, deviceInfo?: any);
     trackable: () => boolean;
     trackNodes: () => any[];
-    getGioNodeInfo: (node: XNODE) => GIONODEINFO;
+    getGioNodeInfo: (node: XNODE) => GIOWEBNODEINFO;
     computeXpath: (xNode: XNODE) => {
         skeleton: string;
         fullXpath: string;
