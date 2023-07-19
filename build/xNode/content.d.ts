@@ -1,2 +1,2 @@
-import { Possible, XNODE } from '@/typings';
-export declare const getContent: (node: Element, tagName: string, xNode: XNODE) => Possible<string>;
+import { Possible } from '@/typings';
+export declare const getContent: (node: Element, tagName: string) => Possible<string>;
