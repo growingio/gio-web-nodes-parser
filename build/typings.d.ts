@@ -45,6 +45,7 @@ export interface GIOWEBNODEINFO {
     xcontent: string;
     outFlow: boolean;
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
+    originNode: Node;
     content?: Possible<string>;
     index?: Possible<number>;
     hyperlink?: Possible<string>;
@@ -74,5 +75,5 @@ export interface GIOHYBRIDNODE {
     deviceInfo: any;
     xpathThreshold: number;
     xNode: XNODE;
-    trackNodes: (target: Element, parentInfo: XNODE) => GIOHYBRIDNODEINFO[];
+    trackNodes: (target: Element, parentInfo: any) => GIOHYBRIDNODEINFO[];
 }

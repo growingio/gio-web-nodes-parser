@@ -4,7 +4,7 @@ declare class GioHybridNode {
     deviceInfo: DeviceInfo;
     xpathThreshold: number;
     constructor(webviewInfo: any, lengthThreshold?: number);
-    trackNodes: (target: Element, parentInfo: XNODE) => any[];
+    trackNodes: (target: Element, parentInfo: any) => any[];
     private _getTrackElements;
     private _getZLevel;
     private _getGioHybridNodeInfo;
