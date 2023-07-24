@@ -37,6 +37,7 @@ export interface XNODE {
     zLevel?: number;
     viewStatus?: 'IN_SHOW' | 'IN_COVERED' | 'OUT';
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
+    trackable?: boolean;
 }
 export interface GIOWEBNODEINFO {
     xpath: string;

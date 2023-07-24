@@ -1,6 +1,6 @@
 {
   "name": "gio-web-nodes-parser",
-  "version": "2.0.0-rc.10",
+  "version": "2.0.0-rc.11",
   "description": "Library of parsing nodes used by GrowingIO web SDK",
   "main": "./build/index.js",
   "module": "./build/index.js",

@@ -37,5 +37,6 @@ declare class xNode implements XNODE {
     private _getRect;
     private _getViewStatus;
     private _getTriggerEvent;
+    private _getXParents;
 }
 export default xNode;

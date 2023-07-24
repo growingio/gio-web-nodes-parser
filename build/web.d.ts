@@ -19,6 +19,5 @@ declare class GioWebNode {
         xcontent: string;
     };
     private _getParent;
-    getXParents: (target: Node) => any[];
 }
 export default GioWebNode;

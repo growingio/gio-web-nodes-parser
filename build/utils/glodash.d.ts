@@ -5,6 +5,7 @@ export declare const isBoolean: (o: any) => boolean;
 export declare const isObject: (o: any) => boolean;
 export declare const isString: (o: any) => boolean;
 export declare const isArray: (o: any) => boolean;
+export declare const last: (o: any) => any;
 export declare const find: (o: any, fn: (currentValue: any) => boolean) => any;
 export declare const findIndex: (o: any, fn: (currentValue: any) => boolean) => number;
 export declare const findLastIndex: (o: any, fn: (currentValue: any) => boolean) => number;
