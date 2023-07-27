@@ -7,9 +7,9 @@ declare class GioWebNode {
     originElement: Element;
     actionType: ACTIONTYPES;
     xpathThreshold: number;
+    trackable: boolean;
     xNode: XNODE;
     constructor(origin: any, action?: ACTIONTYPES, lengthThreshold?: number, deviceInfo?: any);
-    trackable: () => boolean;
     trackNodes: () => any[];
     getGioNodeInfo: (node: XNODE) => GIOWEBNODEINFO;
     computeXpath: (xNode: XNODE) => {

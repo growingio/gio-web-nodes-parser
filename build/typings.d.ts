@@ -32,10 +32,9 @@ export interface XNODE {
     peerNodes: Element[];
     xParents: XNODE[];
     isOutFlow: boolean;
-    isVisible: boolean;
     rect?: Rect;
     zLevel?: number;
-    viewStatus?: 'IN_SHOW' | 'IN_COVERED' | 'OUT';
+    viewStatus?: 'DISPLAYED' | 'OBSCURED' | 'OUTSIDE' | 'HIDDEN';
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
     trackable?: boolean;
 }
@@ -44,7 +43,6 @@ export interface GIOWEBNODEINFO {
     fullXpath: string;
     skeleton: string;
     xcontent: string;
-    outFlow: boolean;
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
     originNode: Node;
     content?: Possible<string>;
@@ -58,7 +56,7 @@ export interface GIOHYBRIDNODEINFO extends GIOWEBNODEINFO {
     width: number;
     height: number;
     zLevel: number;
-    nodeType: string;
+    outFlow: boolean;
     href?: Possible<string>;
     parentXPath?: Possible<string>;
 }
@@ -67,7 +65,7 @@ export interface GIOWEBNODE {
     actionType: ACTIONTYPES;
     xpathThreshold: number;
     xNode: XNODE;
-    trackable: (targetElement: any) => boolean;
+    trackable: boolean;
     trackNodes: () => GIOWEBNODEINFO[];
     getGioNodeInfo: (node: XNODE) => GIOWEBNODEINFO;
     computeXpath: (xNode: XNODE) => any;

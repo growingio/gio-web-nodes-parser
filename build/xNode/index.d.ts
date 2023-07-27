@@ -2,6 +2,8 @@ import { DeviceInfo, Possible, Rect, XNODE } from '@/typings';
 declare class xNode implements XNODE {
     originNode: any;
     deviceInfo?: DeviceInfo;
+    actionType?: string;
+    trackable: boolean;
     index: number;
     tagName: string;
     id: string;
@@ -16,14 +18,13 @@ declare class xNode implements XNODE {
     peerNodes: Element[];
     xParents: XNODE[];
     isOutFlow: boolean;
-    isVisible: boolean;
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
     rect: Rect;
-    viewStatus: 'IN_SHOW' | 'IN_COVERED' | 'OUT';
+    viewStatus: 'DISPLAYED' | 'OBSCURED' | 'OUTSIDE' | 'HIDDEN';
     zLevel: number;
     private _pureList;
     private _pseudoList;
-    constructor(originNode: any, deviceInfo?: DeviceInfo);
+    constructor(originNode: any, deviceInfo?: DeviceInfo, actionType?: string, trackable?: boolean);
     private _getIndex;
     private _getSiblingNode;
     private _getIsPureList;
@@ -33,7 +34,6 @@ declare class xNode implements XNODE {
     private _getIsContainer;
     _getContent: () => void;
     private _getIsOutFlow;
-    private _getIsVisible;
     private _getRect;
     private _getViewStatus;
     private _getTriggerEvent;
