@@ -14,5 +14,5 @@ export declare const containsOnlyText: (node: Element) => boolean;
 export declare const isLeafNode: (node: Possible<Element>) => boolean;
 export declare const isSecondLeafNode: (node: Possible<Element>) => boolean;
 export declare const isIconNode: (node: Possible<Element>) => boolean;
-export declare const getDirectText: (node: Possible<Element>) => any;
+export declare const getDirectText: (node: Possible<Element>) => string;
 export declare const processText: (text: Possible<string>, length?: number) => Possible<string>;

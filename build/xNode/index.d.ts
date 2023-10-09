@@ -4,6 +4,7 @@ declare class xNode implements XNODE {
     deviceInfo?: DeviceInfo;
     actionType?: string;
     trackable: boolean;
+    parentNodes: XNODE[];
     index: number;
     tagName: string;
     id: string;
@@ -24,7 +25,7 @@ declare class xNode implements XNODE {
     zLevel: number;
     private _pureList;
     private _pseudoList;
-    constructor(originNode: any, deviceInfo?: DeviceInfo, actionType?: string, trackable?: boolean);
+    constructor(originNode: any, deviceInfo?: DeviceInfo, actionType?: string, trackable?: boolean, parentNodes?: XNODE[]);
     private _getIndex;
     private _getSiblingNode;
     private _getIsPureList;
