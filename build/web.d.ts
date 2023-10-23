@@ -16,7 +16,6 @@ declare class GioWebNode {
     computeXpath: (xNode: XNODE) => {
         skeleton: string;
         fullXpath: string;
-        xpath: string;
         xcontent: string;
     };
     private _getParent;
