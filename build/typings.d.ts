@@ -74,5 +74,5 @@ export interface GIOHYBRIDNODE {
     deviceInfo: any;
     xpathThreshold: number;
     xNode: XNODE;
-    trackNodes: (target: Element, parentInfo: any) => GIOHYBRIDNODEINFO[];
+    trackNodes: (target: Element, parentInfo: any, ignoreDisplay: boolean) => GIOHYBRIDNODEINFO[];
 }
