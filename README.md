@@ -3,7 +3,7 @@
 ## 安装
 
 ```bash
-npm install --save gio-web-nodes-parser
+npm i gio-web-nodes-parser --save
 ```
 
 ## Web 端/圈选使用
@@ -77,13 +77,22 @@ const gioHybridNode: GIOHYBRIDNODE = new GioHybridNode({
 
 #### trackNodes() => GIOHYBRIDNODEINFO[]
 
-获取指定根节点下所有可圈选节点信息
+获取指定根节点下当前屏幕可视范围内所有可圈选节点信息（并判断元素是否可见，被遮挡的元素会被过滤）
 
 ```js
 const elements = gioHybridNode.trackNodes(root ?? document.body, {
   isContainer: false,
   zLevel: 0
 });
+```
+
+获取指定根节点下当前屏幕可视范围内所有可圈选节点信息（忽略元素是否可见，返回被遮挡的元素）
+
+```js
+const elements = gioHybridNode.trackNodes(root ?? document.body, {
+  isContainer: false,
+  zLevel: 0
+}, true);
 ```
 
 ### 返回属性

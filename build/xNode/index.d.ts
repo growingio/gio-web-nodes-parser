@@ -36,6 +36,7 @@ declare class xNode implements XNODE {
     _getContent: () => void;
     private _getIsOutFlow;
     private _getRect;
+    private _getListItemViewStatus;
     private _getViewStatus;
     private _getTriggerEvent;
     private _getXParents;
