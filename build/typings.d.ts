@@ -9,6 +9,7 @@ export interface DeviceInfo {
     webviewWidth: number;
     webviewHeight: number;
     webviewZLevel: number;
+    isLimitViewport?: boolean;
 }
 export interface Rect {
     top: number;
@@ -29,6 +30,7 @@ export interface XNODE {
     isPseudoList: boolean;
     isPureList: boolean;
     isContainer: boolean;
+    isLimitViewport: boolean;
     peerNodes: Element[];
     xParents: XNODE[];
     isOutFlow: boolean;

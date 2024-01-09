@@ -19,6 +19,7 @@ declare class xNode implements XNODE {
     peerNodes: Element[];
     xParents: XNODE[];
     isOutFlow: boolean;
+    isLimitViewport: boolean;
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
     rect: Rect;
     viewStatus: 'DISPLAYED' | 'OBSCURED' | 'OUTSIDE' | 'HIDDEN';
