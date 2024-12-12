@@ -1,10 +1,10 @@
 import { Possible } from '@/typings';
-export declare const consoleText: (msg: string, type?: 'info' | 'success' | 'error' | 'warn') => void;
+export declare const consoleText: (msg: string, type?: "info" | "success" | "error" | "warn") => void;
 export declare const hasAttribute: (node: Element, attribute: string) => boolean;
 export declare const getAttribute: (node: Possible<Element>, attribute: string) => any;
-export declare const getEffectiveNode: (node: Possible<Element>) => Element;
+export declare const getEffectiveNode: (node: Possible<Element>) => [Element, boolean];
 export declare const isTooDeep: (node: Possible<Element>, threshold?: number, currentDepth?: number) => boolean;
-export declare const isTrackable: (node: Possible<Element>, actionType: string) => boolean;
+export declare const getTrackable: (node: Possible<Element>, actionType: string) => boolean;
 export declare const getChildNodes: (node: Possible<Element>, includeTextNode?: boolean) => Element[];
 export declare const getParentNode: (node: Possible<Element>) => HTMLElement;
 export declare const isRootNode: (node: Possible<Element>) => boolean;

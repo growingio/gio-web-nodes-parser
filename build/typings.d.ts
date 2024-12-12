@@ -38,7 +38,8 @@ export interface XNODE {
     zLevel?: number;
     viewStatus?: 'DISPLAYED' | 'OBSCURED' | 'OUTSIDE' | 'HIDDEN';
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
-    trackable?: boolean;
+    isTrackable?: boolean;
+    isUpgrade?: boolean;
 }
 export interface GIOWEBNODEINFO {
     xpath: string;
@@ -67,7 +68,8 @@ export interface GIOWEBNODE {
     actionType: ACTIONTYPES;
     xpathThreshold: number;
     xNode: XNODE;
-    trackable: boolean;
+    isTrackable: boolean;
+    isUpgrade: boolean;
     trackNodes: () => GIOWEBNODEINFO[];
     getGioNodeInfo: (node: XNODE) => GIOWEBNODEINFO;
     computeXpath: (xNode: XNODE) => any;
@@ -76,5 +78,7 @@ export interface GIOHYBRIDNODE {
     deviceInfo: any;
     xpathThreshold: number;
     xNode: XNODE;
+    isTrackable: boolean;
+    isUpgrade: boolean;
     trackNodes: (target: Element, parentInfo: any, ignoreDisplay: boolean) => GIOHYBRIDNODEINFO[];
 }
