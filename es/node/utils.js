@@ -1,27 +1,28 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeDiffTagOnHeadAndTail = exports.computeXpath = exports.getMarkIndex = exports.getEffectiveNode = exports.isIgnore = exports.depthInside = exports.changeableInput = exports.clickableInput = exports.onlyContainsTextChildren = exports.onlyContainsIconChildren = exports.supportIconTag = exports.isContainerTag = exports.isListTag = exports.isParentOfLeaf = exports.isLeaf = exports.getChildren = exports.getDeepChildren = exports.findParent = exports.isRootNode = exports.hasValidAttribute = void 0;
+exports.removeDiffTagOnHeadAndTail = exports.computeXpath = exports.getMarkIndex = exports.getEffectiveNode = exports.isIgnore = exports.depthInside = exports.changeableInput = exports.clickableInput = exports.onlyContainsTextChildren = exports.onlyContainsIconChildren = exports.supportIconTag = exports.isContainerTag = exports.isListTag = exports.isParentOfLeaf = exports.isLeaf = exports.getChildren = exports.getDeepChildren = exports.findParent = exports.isRootNode = exports.hasValidAttribute = exports.arrayFrom = void 0;
 var utils_1 = require("../utils");
 var constant_1 = require("../utils/constant");
-var array_from_1 = __importDefault(require("array-from"));
+var arrayFrom = function () {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+    return Array.prototype.slice.call(args);
+};
+exports.arrayFrom = arrayFrom;
 var hasValidAttribute = function (node, attr) {
-    return node instanceof Element && node.hasAttribute(attr) && node.getAttribute(attr) !== 'false';
+    if (!(node instanceof Element))
+        return false;
+    var value = node.getAttribute(attr);
+    return value !== null && value !== 'false';
 };
 exports.hasValidAttribute = hasValidAttribute;
 var isRootNode = function (node) {
-    return !node || ['BODY', 'HTML', '#document'].indexOf(node.nodeName) !== -1;
+    if (!node)
+        return true;
+    var rootNames = ['BODY', 'HTML', '#document'];
+    return rootNames.includes(node.nodeName);
 };
 exports.isRootNode = isRootNode;
 var findParent = function (child, filter) {
@@ -36,16 +37,28 @@ var findParent = function (child, filter) {
 };
 exports.findParent = findParent;
 var getDeepChildren = function (parent) {
-    return (0, array_from_1.default)((parent === null || parent === void 0 ? void 0 : parent.childNodes) || []).reduce(function (result, current) {
-        if (current instanceof Element) {
-            return __spreadArray(__spreadArray(__spreadArray([], result, true), [current], false), (0, exports.getDeepChildren)(current), true);
-        }
-        return result;
-    }, []);
+    var children = [];
+    var queue = [];
+    var initialChildren = (0, exports.getChildren)(parent);
+    queue.push.apply(queue, initialChildren);
+    var index = 0;
+    while (index < queue.length) {
+        var current = queue[index++];
+        children.push(current);
+        queue.push.apply(queue, (0, exports.getChildren)(current));
+    }
+    return children;
 };
 exports.getDeepChildren = getDeepChildren;
 var getChildren = function (parent) {
-    return (0, array_from_1.default)((parent === null || parent === void 0 ? void 0 : parent.childNodes) || []).filter(function (node) { return node instanceof Element; });
+    try {
+        if (!(parent === null || parent === void 0 ? void 0 : parent.childNodes))
+            return [];
+        return (0, exports.arrayFrom)(parent.childNodes).filter(function (node) { return node.nodeType === Node.ELEMENT_NODE; });
+    }
+    catch (error) {
+        return [];
+    }
 };
 exports.getChildren = getChildren;
 var isLeaf = function (node) {
@@ -57,27 +70,26 @@ var isLeaf = function (node) {
 exports.isLeaf = isLeaf;
 var isParentOfLeaf = function (node) {
     if (node.hasChildNodes() && node.nodeName !== 'svg') {
-        return (0, array_from_1.default)(node.childNodes).filter(function (child) { return !(0, exports.isLeaf)(child); }).length === 0;
+        return ((0, exports.arrayFrom)(node.childNodes).filter(function (child) { return !(0, exports.isLeaf)(child); }).length === 0);
     }
     return false;
 };
 exports.isParentOfLeaf = isParentOfLeaf;
 var isListTag = function (node) {
-    return constant_1.LIST_TAGS.indexOf(node.nodeName) !== -1;
+    return constant_1.LIST_TAGS.includes(node.nodeName);
 };
 exports.isListTag = isListTag;
 var isContainerTag = function (node) {
     return ((0, exports.hasValidAttribute)(node, constant_1.GROWING_CONTAINER) ||
-        constant_1.SUPPORTED_CONTAINER_TAGS.indexOf(node.nodeName) !== -1);
+        constant_1.SUPPORTED_CONTAINER_TAGS.includes(node.nodeName));
 };
 exports.isContainerTag = isContainerTag;
 var supportIconTag = function (node) {
-    var name = node.nodeName;
-    return constant_1.SUPPORTED_ICON_TAGS.indexOf(name) !== -1;
+    return constant_1.SUPPORTED_ICON_TAGS.includes(node.nodeName);
 };
 exports.supportIconTag = supportIconTag;
 var onlyContainsIconChildren = function (node) {
-    if (!!node.textContent) {
+    if (node.textContent) {
         return false;
     }
     var childes = (0, exports.getChildren)(node);
@@ -99,19 +111,17 @@ var onlyContainsTextChildren = function (node) {
     }
     return !(0, exports.getDeepChildren)(node)
         .map(function (child) { return child.tagName; })
-        .some(function (name) { return constant_1.TEXT_NODE.indexOf(name) === -1; });
+        .some(function (name) { return !constant_1.TEXT_NODE.includes(name); });
 };
 exports.onlyContainsTextChildren = onlyContainsTextChildren;
 var clickableInput = function (node) {
     return (node instanceof HTMLInputElement &&
-        node.tagName === 'INPUT' &&
-        constant_1.SUPPORTED_CLICK_INPUT_TYPES.indexOf(node.type) !== -1);
+        constant_1.SUPPORTED_CLICK_INPUT_TYPES.includes(node.type));
 };
 exports.clickableInput = clickableInput;
 var changeableInput = function (node) {
     return (node instanceof HTMLInputElement &&
-        node.tagName === 'INPUT' &&
-        constant_1.SUPPORTED_CHANGE_TYPES.indexOf(node.type) !== -1);
+        constant_1.SUPPORTED_CHANGE_TYPES.includes(node.type));
 };
 exports.changeableInput = changeableInput;
 var depthInside = function (node, threshold, depth) {
@@ -147,7 +157,9 @@ var isIgnore = function (node) {
 exports.isIgnore = isIgnore;
 var getEffectiveNode = function (node) {
     var getName = function (el) { var _a; return (_a = el.tagName) === null || _a === void 0 ? void 0 : _a.toLowerCase(); };
-    var isSupport = function (n) { return n instanceof Element && constant_1.UNSUPPORTED_TAGS.indexOf(getName(n)) === -1; };
+    var isSupport = function (n) {
+        return n instanceof Element && !constant_1.UNSUPPORTED_TAGS.includes(getName(n));
+    };
     var isBtnWrapper = function (el) {
         return !false && el.tagName === 'BUTTON' && (0, exports.onlyContainsTextChildren)(el);
     };
@@ -163,24 +175,33 @@ var getEffectiveNode = function (node) {
 };
 exports.getEffectiveNode = getEffectiveNode;
 var getMarkIndex = function (node) {
-    if (node instanceof Element) {
-        var markIndex = node.getAttribute(constant_1.GROWING_INDEX) ||
-            node.getAttribute(constant_1.GROWING_INDEX_OLD) ||
-            node.getAttribute(constant_1.GROWING_CDP_INDEX);
-        if (markIndex) {
-            if (/^\d{1,10}$/.test(markIndex) && +markIndex >= 0 && +markIndex < 2147483647) {
-                return +markIndex;
-            }
-            else {
-                !false &&
-                    window.console.error('[GioNode]：标记的index不符合规范（index必须是大于等于0且小于2147483647的整数字）。', markIndex);
+    if (!(node instanceof Element))
+        return undefined;
+    var attributes = [constant_1.GROWING_INDEX, constant_1.GROWING_INDEX_OLD, constant_1.GROWING_CDP_INDEX];
+    for (var _i = 0, attributes_1 = attributes; _i < attributes_1.length; _i++) {
+        var attr = attributes_1[_i];
+        var value = node.getAttribute(attr);
+        if (value === null)
+            continue;
+        if (/^\d{1,10}$/.test(value)) {
+            var numValue = Number(value);
+            if (numValue >= 0 && numValue < 2147483647) {
+                return numValue;
             }
         }
+        if (!false) {
+            window.console.error('[GioNode]：标记的index不符合规范（index必须是大于等于0且小于2147483647的整数字）。', value);
+        }
+        break;
     }
     return undefined;
 };
 exports.getMarkIndex = getMarkIndex;
 var computeXpath = function (target) {
+    if (!target) {
+        console.error('Invalid target node');
+        return ['', '', ''];
+    }
     var nodePaths = target.parentPaths(true);
     var maxLayers = Math.min(nodePaths.length, 4 + +(nodePaths.length >= 10));
     var xpaths = ['', '', ''];
@@ -197,12 +218,13 @@ var computeXpath = function (target) {
 };
 exports.computeXpath = computeXpath;
 var removeDiffTagOnHeadAndTail = function (elements, target) {
-    var sameNodeName = function (el) { return el.nodeName === target.nodeName; };
-    var start = (0, utils_1.findIndex)(elements, sameNodeName);
-    var end = (0, utils_1.lastFindIndex)(elements, sameNodeName);
-    if (start === -1 || end === -1) {
+    var hasSameNodeName = function (el) { return el.nodeName === target.nodeName; };
+    var start = (0, utils_1.findIndex)(elements, hasSameNodeName);
+    if (start === -1)
         return [];
-    }
+    var end = (0, utils_1.lastFindIndex)(elements, hasSameNodeName);
+    if (end === -1)
+        return [];
     return elements.slice(start, end + 1);
 };
 exports.removeDiffTagOnHeadAndTail = removeDiffTagOnHeadAndTail;

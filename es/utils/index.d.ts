@@ -1,5 +1,5 @@
 import { Maybe } from '../typings';
-export declare const filterText: (text: Maybe<string>, cutOff?: boolean) => Maybe<string>;
+export declare const filterText: (text: Maybe<string>, cutOff?: boolean) => string;
 export declare const splitNoEmpty: (source: string, separator: string | RegExp) => string[];
 export declare const normalizePath: (path: string) => string;
 export declare const rmBlank: (str: Maybe<string>) => string;

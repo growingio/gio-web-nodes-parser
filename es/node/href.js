@@ -29,6 +29,7 @@ function getElementHref(elem) {
             return getAnchorHref(node);
         case 'img':
             return getImgHref(node);
+        default:
     }
     return undefined;
 }

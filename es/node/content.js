@@ -9,7 +9,6 @@ var href_1 = require("./href");
 var constant_1 = require("../utils/constant");
 var base_node_1 = __importDefault(require("./base-node"));
 var utils_2 = require("../utils");
-var array_from_1 = __importDefault(require("array-from"));
 var getFor = function (label) {
     return label.htmlFor || label.getAttribute('for');
 };
@@ -21,7 +20,8 @@ var getTitle = function (node) {
     return title === null || title === void 0 ? void 0 : title.trim();
 };
 function getAnchorContent(anchor) {
-    if (((0, utils_1.isLeaf)(anchor) || (0, utils_1.onlyContainsIconChildren)(anchor)) && anchor.textContent) {
+    if (((0, utils_1.isLeaf)(anchor) || (0, utils_1.onlyContainsIconChildren)(anchor)) &&
+        anchor.textContent) {
         var text = (0, utils_2.filterText)(anchor.textContent);
         if (text) {
             return text;
@@ -39,7 +39,7 @@ function getAnchorContent(anchor) {
 }
 function getButtonContent(button) {
     var _a;
-    if (!!((_a = button.name) === null || _a === void 0 ? void 0 : _a.length)) {
+    if ((_a = button.name) === null || _a === void 0 ? void 0 : _a.length) {
         return button.name;
     }
     var text = (0, utils_2.filterText)(button.textContent);
@@ -102,13 +102,13 @@ function getLabelContent(node) {
     return undefined;
 }
 function getSelectContent(select) {
-    return ((0, array_from_1.default)(select.options)
+    return ((0, utils_1.arrayFrom)(select.options)
         .filter(function (opt) { return opt.selected; })
         .map(function (opt) { return opt.label; })
         .join(', ') || select.value);
 }
 function getSvgContent(svg) {
-    for (var _i = 0, _a = (0, array_from_1.default)(svg.childNodes); _i < _a.length; _i++) {
+    for (var _i = 0, _a = (0, utils_1.arrayFrom)(svg.childNodes); _i < _a.length; _i++) {
         var child = _a[_i];
         if (child.nodeType === Node.ELEMENT_NODE &&
             child.tagName.toLowerCase() === 'use' &&
@@ -127,7 +127,7 @@ function getLeafContent(leaf) {
 }
 function getParentOfLeafContent(node) {
     var content = '';
-    for (var _i = 0, _a = (0, array_from_1.default)(node.childNodes); _i < _a.length; _i++) {
+    for (var _i = 0, _a = (0, utils_1.arrayFrom)(node.childNodes); _i < _a.length; _i++) {
         var childNode = _a[_i];
         content +=
             (childNode.nodeType === Node.TEXT_NODE && childNode.textContent
@@ -137,8 +137,9 @@ function getParentOfLeafContent(node) {
     return (0, utils_2.filterText)(content, false);
 }
 function getBestChildContent(elem) {
-    var iconContent = undefined, _isIcon = false;
-    for (var _i = 0, _a = (0, array_from_1.default)(elem.childNodes); _i < _a.length; _i++) {
+    var iconContent;
+    var _isIcon = false;
+    for (var _i = 0, _a = (0, utils_1.arrayFrom)(elem.childNodes); _i < _a.length; _i++) {
         var childNode = _a[_i];
         if (childNode.nodeType === Node.TEXT_NODE) {
             var content = (0, utils_2.filterText)(childNode.textContent);
@@ -172,7 +173,7 @@ function getBestChildContent(elem) {
 }
 function getFormContent(form) {
     var inputs = form.getElementsByTagName('input');
-    for (var _i = 0, _a = (0, array_from_1.default)(inputs); _i < _a.length; _i++) {
+    for (var _i = 0, _a = (0, utils_1.arrayFrom)(inputs); _i < _a.length; _i++) {
         var inputElement = _a[_i];
         if (inputElement.type === 'search' ||
             (inputElement.type === 'text' &&
@@ -218,6 +219,7 @@ function _getElementContent(elem) {
             return getSelectContent(node);
         case 'form':
             return getFormContent(node);
+        default:
     }
     if ((0, utils_1.isLeaf)(node)) {
         return getLeafContent(node);

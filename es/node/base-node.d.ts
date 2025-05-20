@@ -16,6 +16,8 @@ declare class BaseNode {
     get list(): boolean;
     get index(): Maybe<number>;
     get container(): boolean;
+    private static _parentCache;
+    private _parent;
     get parent(): Maybe<BaseNode>;
     parentPaths(withSelf?: boolean): BaseNode[];
 }

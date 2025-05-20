@@ -1,5 +1,6 @@
 import BaseNode from './base-node';
 import { Maybe } from '../typings';
+export declare const arrayFrom: (...args: any[]) => any;
 export declare const hasValidAttribute: (node: Node, attr: string) => boolean;
 export declare const isRootNode: (node: Maybe<Node>) => boolean;
 export declare const findParent: <P>(child: Node, filter: (current: Node) => boolean | void) => P;
@@ -18,5 +19,5 @@ export declare const depthInside: (node: Element, threshold?: number, depth?: nu
 export declare const isIgnore: (node: Node) => boolean;
 export declare const getEffectiveNode: (node: Node) => Element;
 export declare const getMarkIndex: (node: Node) => Maybe<number>;
-export declare const computeXpath: (target: BaseNode) => string[];
+export declare const computeXpath: (target: Maybe<BaseNode>) => string[];
 export declare const removeDiffTagOnHeadAndTail: (elements: Element[], target: Node) => Element[];

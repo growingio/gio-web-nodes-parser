@@ -62,7 +62,9 @@ var GioNode = (function () {
                 var gn = new GioNode(node, _this.action, false);
                 if (gn.traceable() && gn.index) {
                     _this.parentIndex = gn.index;
+                    return true;
                 }
+                return false;
             });
         }
         return this.parentIndex;
@@ -90,7 +92,9 @@ var GioNode = (function () {
     });
     GioNode.prototype.info = function (inferIndex) {
         if (inferIndex === void 0) { inferIndex = true; }
-        inferIndex && this.inferParentIndex();
+        if (inferIndex) {
+            this.inferParentIndex();
+        }
         return {
             skeleton: this.skeleton,
             fullXpath: this.fullXpath,
@@ -137,7 +141,7 @@ var GioNode = (function () {
                 parent_1 = parent_1.parentElement;
             }
         }
-        var parentIndex = undefined;
+        var parentIndex;
         return trackNodes.map(function (gn) {
             var info = gn.info(false);
             var selfIndex = info.index;
@@ -149,8 +153,8 @@ var GioNode = (function () {
     };
     Object.defineProperty(GioNode.prototype, "parentElement", {
         get: function () {
-            var parent = this.target.parentNode;
-            if (parent && parent.nodeName && !(0, utils_1.isRootNode)(parent)) {
+            var parent = this.target.parentElement;
+            if (parent && !(0, utils_1.isRootNode)(parent)) {
                 return new GioNode(parent, this.action, false);
             }
             return undefined;

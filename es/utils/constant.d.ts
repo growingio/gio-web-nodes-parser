@@ -7,6 +7,8 @@ export declare const UNSUPPORTED_CLICK_TAGS: string[];
 export declare const TEXT_NODE: string[];
 export declare const UNSUPPORTED_TAGS: string[];
 export declare const EXCLUDE_CLASS_RE: RegExp;
+export declare const INVALID_CAMELCASE_RE: RegExp;
+export declare const INVALID_NUMERIC_RE: RegExp;
 export declare const VALID_ID_SELECTOR: RegExp;
 export declare const VALID_CLASS_SELECTOR: RegExp;
 export declare const GROWING_IGNORE = "data-growing-ignore";
