@@ -31,8 +31,8 @@ exports.UNSUPPORTED_TAGS = [
     'use'
 ];
 exports.EXCLUDE_CLASS_RE = /(^| |[^ ]+\-)(clear|clearfix|active|hover|enabled|current|selected|unselected|hidden|display|focus|disabled|undisabled|open|checked|unchecked|undefined|null|ng-|growing-)[^\. ]*/g;
-exports.INVALID_CAMELCASE_RE = /^[a-z][A-Za-z]*$/;
-exports.INVALID_NUMERIC_RE = /^[0-9]+$/;
+exports.INVALID_CAMELCASE_RE = /[a-z][A-Z][a-z][A-Z]/;
+exports.INVALID_NUMERIC_RE = /[0-9][0-9][0-9][0-9]/;
 exports.VALID_ID_SELECTOR = /^[a-zA-Z-\_][a-zA-Z\-\_0-9]+$/;
 exports.VALID_CLASS_SELECTOR = /^([a-zA-Z\-\_0-9]+)$/;
 exports.GROWING_IGNORE = 'data-growing-ignore';

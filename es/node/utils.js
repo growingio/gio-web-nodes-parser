@@ -3,12 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeDiffTagOnHeadAndTail = exports.computeXpath = exports.getMarkIndex = exports.getEffectiveNode = exports.isIgnore = exports.depthInside = exports.changeableInput = exports.clickableInput = exports.onlyContainsTextChildren = exports.onlyContainsIconChildren = exports.supportIconTag = exports.isContainerTag = exports.isListTag = exports.isParentOfLeaf = exports.isLeaf = exports.getChildren = exports.getDeepChildren = exports.findParent = exports.isRootNode = exports.hasValidAttribute = exports.arrayFrom = void 0;
 var utils_1 = require("../utils");
 var constant_1 = require("../utils/constant");
-var arrayFrom = function () {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    return Array.prototype.slice.call(args);
+var arrayFrom = function (arrayLike) {
+    return Array.prototype.slice.call(arrayLike);
 };
 exports.arrayFrom = arrayFrom;
 var hasValidAttribute = function (node, attr) {
@@ -54,6 +50,7 @@ var getChildren = function (parent) {
     try {
         if (!(parent === null || parent === void 0 ? void 0 : parent.childNodes))
             return [];
+        console.log((0, exports.arrayFrom)(parent.childNodes), 77777);
         return (0, exports.arrayFrom)(parent.childNodes).filter(function (node) { return node.nodeType === Node.ELEMENT_NODE; });
     }
     catch (error) {
@@ -63,6 +60,7 @@ var getChildren = function (parent) {
 exports.getChildren = getChildren;
 var isLeaf = function (node) {
     if (node.hasChildNodes() && node.nodeName !== 'svg') {
+        console.log((0, exports.getChildren)(node), 99999);
         return (0, exports.getChildren)(node).length === 0;
     }
     return true;

@@ -64,8 +64,8 @@ var BaseNode = (function () {
             var guessIndex = 0, similarCount = 0;
             var currentTag = this.tagName;
             var currentIndex = -1;
-            for (var idx = 0; idx < siblingsCount; idx++) {
-                var current = sameSiblings[idx];
+            for (var idx = 1; idx < siblingsCount; idx++) {
+                var current = sameSiblings[idx - 1];
                 if (!(current instanceof Element))
                     continue;
                 if (current.tagName !== currentTag) {

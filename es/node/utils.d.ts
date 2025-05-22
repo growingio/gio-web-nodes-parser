@@ -1,6 +1,6 @@
 import BaseNode from './base-node';
 import { Maybe } from '../typings';
-export declare const arrayFrom: (...args: any[]) => any;
+export declare const arrayFrom: (arrayLike: any) => any;
 export declare const hasValidAttribute: (node: Node, attr: string) => boolean;
 export declare const isRootNode: (node: Maybe<Node>) => boolean;
 export declare const findParent: <P>(child: Node, filter: (current: Node) => boolean | void) => P;
