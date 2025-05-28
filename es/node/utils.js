@@ -50,7 +50,6 @@ var getChildren = function (parent) {
     try {
         if (!(parent === null || parent === void 0 ? void 0 : parent.childNodes))
             return [];
-        console.log((0, exports.arrayFrom)(parent.childNodes), 77777);
         return (0, exports.arrayFrom)(parent.childNodes).filter(function (node) { return node.nodeType === Node.ELEMENT_NODE; });
     }
     catch (error) {
@@ -60,7 +59,6 @@ var getChildren = function (parent) {
 exports.getChildren = getChildren;
 var isLeaf = function (node) {
     if (node.hasChildNodes() && node.nodeName !== 'svg') {
-        console.log((0, exports.getChildren)(node), 99999);
         return (0, exports.getChildren)(node).length === 0;
     }
     return true;

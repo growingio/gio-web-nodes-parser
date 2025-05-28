@@ -138,12 +138,18 @@ var BaseNode = (function () {
             var _a;
             if (!((_a = this.node) === null || _a === void 0 ? void 0 : _a.parentNode))
                 return null;
-            if (!this._parent) {
-                var parentNode = this.node.parentNode;
-                this._parent =
-                    BaseNode._parentCache.get(parentNode) || new BaseNode(parentNode);
-                BaseNode._parentCache.set(parentNode, this._parent);
+            var parentNode = this.node.parentNode;
+            var cachedParent = BaseNode._parentCache.get(parentNode);
+            var currentId = getId(parentNode);
+            var currentClassList = getKlass(parentNode);
+            var shouldUpdate = !cachedParent ||
+                cachedParent.id !== currentId ||
+                !(0, utils_1.arrayEquals)(cachedParent.classList, currentClassList);
+            if (shouldUpdate) {
+                cachedParent = new BaseNode(parentNode);
+                BaseNode._parentCache.set(parentNode, cachedParent);
             }
+            this._parent = cachedParent;
             return this._parent;
         },
         enumerable: false,
