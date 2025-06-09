@@ -9,7 +9,7 @@ declare class xNode implements XNODE {
     tagName: string;
     id: string;
     classList: string[];
-    content: Possible<string>;
+    get content(): Possible<string>;
     hyperlink: Possible<string>;
     currentXpath: string;
     isIgnored: boolean;
@@ -27,6 +27,9 @@ declare class xNode implements XNODE {
     private _pureList;
     private _pseudoList;
     constructor(originNode: any, deviceInfo?: DeviceInfo, actionType?: string, isTrackable?: boolean, parentNodes?: XNODE[]);
+    private _checkGioIndex;
+    private _getDlIndex;
+    private _getListIndex;
     private _getIndex;
     private _getSiblingNode;
     private _getIsPureList;
@@ -34,12 +37,12 @@ declare class xNode implements XNODE {
     private _getClassList;
     private _getCurrentXpath;
     private _getIsContainer;
-    _getContent: () => void;
     private _getIsOutFlow;
     private _getRect;
     private _getListItemViewStatus;
     private _getViewStatus;
     private _getTriggerEvent;
+    private static xNodeCache;
     private _getXParents;
 }
 export default xNode;

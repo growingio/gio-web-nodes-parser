@@ -12,13 +12,16 @@ declare class GioWebNode {
     isUpgrade: boolean;
     xNode: XNODE;
     constructor(origin: any, action?: ACTIONTYPES, lengthThreshold?: number, deviceInfo?: any, parentNode?: GioWebNode);
-    trackNodes: () => any[];
+    private static xpathCache;
+    trackNodes: () => GIOWEBNODEINFO[];
+    private static nodeInfoCache;
     getGioNodeInfo: (node: XNODE) => GIOWEBNODEINFO;
     computeXpath: (xNode: XNODE) => {
         skeleton: string;
         fullXpath: string;
         xcontent: string;
     };
+    private static parentCache;
     private _getParent;
 }
 export default GioWebNode;
