@@ -31,9 +31,13 @@ declare class xNode implements XNODE {
     private _getDlIndex;
     private _getListIndex;
     private _getIndex;
-    private _getSiblingNode;
+    private _isListNode;
     private _getIsPureList;
-    private _getIsInPseudoList;
+    private _getIsPseudoList;
+    private _findLongestUniformSequence;
+    private _getSiblings;
+    private _compareNodes;
+    private _compareArrays;
     private _getClassList;
     private _getCurrentXpath;
     private _getIsContainer;
