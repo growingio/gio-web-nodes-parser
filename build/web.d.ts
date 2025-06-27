@@ -13,6 +13,7 @@ declare class GioWebNode {
     xNode: XNODE;
     constructor(origin: any, action?: ACTIONTYPES, lengthThreshold?: number, deviceInfo?: any, parentNode?: GioWebNode);
     private static xpathCache;
+    private updateNodesIndex;
     trackNodes: () => GIOWEBNODEINFO[];
     private static nodeInfoCache;
     getGioNodeInfo: (node: XNODE) => GIOWEBNODEINFO;
