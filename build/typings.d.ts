@@ -36,7 +36,7 @@ export interface XNODE {
     isOutFlow: boolean;
     rect?: Rect;
     zLevel?: number;
-    viewStatus?: 'DISPLAYED' | 'OBSCURED' | 'OUTSIDE' | 'HIDDEN';
+    viewStatus?: keyof typeof import('./utils/constant').VIEW_STATUS;
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
     isTrackable?: boolean;
     isUpgrade?: boolean;

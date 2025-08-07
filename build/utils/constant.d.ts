@@ -1,9 +1,14 @@
+export declare const BASIC_UNSUPPORTED_TAGS: string[];
+export declare const DOCUMENT_STRUCTURE_TAGS: string[];
+export declare const SVG_TAGS: string[];
+export declare const OTHER_UNSUPPORTED_TAGS: string[];
 export declare const UNSUPPORTED_TAGS: string[];
 export declare const SUPPORTED_CONTAINER_INPUT: string[];
 export declare const SUPPORTED_CLICK_INPUT_TYPES: string[];
 export declare const CONTENT_CHANGE_INPUT_TYPES: string[];
 export declare const SUPPORTED_CHANGE_INPUT_TYPES: string[];
 export declare const LIST_TAGS: string[];
+export declare const TABLE_CELL_TAGS: string[];
 export declare const SUPPORTED_CONTAINER_TAGS: string[];
 export declare const SUPPORTED_ICON_TAGS: string[];
 export declare const TEXT_NODE: string[];
@@ -15,3 +20,12 @@ export declare const GIO_TRACK = "data-growing-track";
 export declare const GIO_CONTAINER = "data-growing-container";
 export declare const GIO_INDEX = "data-growing-index";
 export declare const GIO_TITLE = "data-growing-title";
+export declare const SPECIAL_TAGS: readonly ["circle-shape", "circle-page", "heatmap-page"];
+export declare const SPECIAL_ID_PATTERNS: readonly ["__vconsole", "__giokit"];
+export declare const VIEW_STATUS: {
+    readonly DISPLAYED: "DISPLAYED";
+    readonly OBSCURED: "OBSCURED";
+    readonly OUTSIDE: "OUTSIDE";
+    readonly HIDDEN: "HIDDEN";
+};
+export declare const POSITION_Z_LEVEL_MAP: Record<string, number>;

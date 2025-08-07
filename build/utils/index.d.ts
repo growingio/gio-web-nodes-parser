@@ -6,7 +6,7 @@ export declare const getEffectiveNode: (node: Possible<Element>, maxDepth?: numb
 export declare const isTooDeep: (node: Possible<Element>, threshold?: number) => boolean;
 export declare const getTrackable: (node: Possible<Element>, actionType: string) => boolean;
 export declare const getChildNodes: (node: Possible<Element>, includeTextNode?: boolean) => Element[];
-export declare const getParentNode: (node: Possible<Element>) => HTMLElement;
+export declare const getParentNode: (node: Possible<Element>) => HTMLElement | null;
 export declare const isRootNode: (node: Possible<Element>) => boolean;
 export declare const isContainer: (node: Possible<Element>) => boolean;
 export declare const containsOnlyIcons: (node: Element) => boolean;

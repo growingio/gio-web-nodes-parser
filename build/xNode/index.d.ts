@@ -1,4 +1,5 @@
 import { DeviceInfo, Possible, Rect, XNODE } from '@/typings';
+import { VIEW_STATUS } from '@/utils/constant';
 declare class xNode implements XNODE {
     originNode: any;
     deviceInfo?: DeviceInfo;
@@ -22,7 +23,7 @@ declare class xNode implements XNODE {
     isLimitViewport: boolean;
     triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
     rect: Rect;
-    viewStatus: 'DISPLAYED' | 'OBSCURED' | 'OUTSIDE' | 'HIDDEN';
+    viewStatus?: keyof typeof VIEW_STATUS;
     zLevel: number;
     private _pureList;
     private _pseudoList;
