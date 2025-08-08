@@ -8,7 +8,6 @@ export declare const SUPPORTED_CLICK_INPUT_TYPES: string[];
 export declare const CONTENT_CHANGE_INPUT_TYPES: string[];
 export declare const SUPPORTED_CHANGE_INPUT_TYPES: string[];
 export declare const LIST_TAGS: string[];
-export declare const TABLE_CELL_TAGS: string[];
 export declare const SUPPORTED_CONTAINER_TAGS: string[];
 export declare const SUPPORTED_ICON_TAGS: string[];
 export declare const TEXT_NODE: string[];
