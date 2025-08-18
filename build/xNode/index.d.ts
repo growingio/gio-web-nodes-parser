@@ -36,6 +36,7 @@ declare class xNode implements XNODE {
     private _getIsPureList;
     private _getIsPseudoList;
     private _findLongestUniformSequence;
+    private _updateMaxSequenceIfBetter;
     private _getSiblings;
     private _compareNodes;
     private _compareArrays;
