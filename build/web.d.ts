@@ -1,9 +1,9 @@
-import { ACTIONTYPES, GIOWEBNODEINFO, XNODE } from './typings';
+import { ACTIONTYPES, GIOWEBNODEINFO, XNODE, DeviceInfo, XPathResult } from './typings';
 declare class GioWebNode {
-    origin: any;
+    origin: Element | any;
     action?: ACTIONTYPES;
     lengthThreshold?: number;
-    deviceInfo?: any;
+    deviceInfo?: DeviceInfo;
     parentNode?: GioWebNode;
     originElement: Element;
     actionType: ACTIONTYPES;
@@ -11,17 +11,13 @@ declare class GioWebNode {
     isTrackable: boolean;
     isUpgrade: boolean;
     xNode: XNODE;
-    constructor(origin: any, action?: ACTIONTYPES, lengthThreshold?: number, deviceInfo?: any, parentNode?: GioWebNode);
+    constructor(origin: Element | any, action?: ACTIONTYPES, lengthThreshold?: number, deviceInfo?: DeviceInfo, parentNode?: GioWebNode);
     private updateNodesIndex;
     trackNodes: () => GIOWEBNODEINFO[];
     private static nodeInfoCache;
     getGioNodeInfo: (node: XNODE) => GIOWEBNODEINFO;
     private static xpathCache;
-    computeXpath: (xNode: XNODE) => {
-        skeleton: string;
-        fullXpath: string;
-        xcontent: string;
-    };
+    computeXpath: (xNode: XNODE) => XPathResult;
     private static parentCache;
     private _getParent;
 }

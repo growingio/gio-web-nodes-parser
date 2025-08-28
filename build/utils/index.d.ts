@@ -1,7 +1,7 @@
 import { Possible } from '@/typings';
 export declare const consoleText: (msg: string, type?: "info" | "success" | "error" | "warn") => void;
 export declare const hasAttribute: (node: Element, attribute: string) => boolean;
-export declare const getAttribute: (node: Possible<Element>, attribute: string) => any;
+export declare const getAttribute: (node: Possible<Element>, attribute: string) => string | null;
 export declare const getEffectiveNode: (node: Possible<Element>, maxDepth?: number) => [Element, boolean];
 export declare const isTooDeep: (node: Possible<Element>, threshold?: number) => boolean;
 export declare const getTrackable: (node: Possible<Element>, actionType: string) => boolean;

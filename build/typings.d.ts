@@ -1,5 +1,16 @@
 export type Possible<T> = T | undefined | null;
-export type ACTIONTYPES = 'click' | 'change' | 'hover' | null | string;
+export type NonNullable<T> = T extends null | undefined ? never : T;
+export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+export type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+export type ACTIONTYPES = 'click' | 'change' | 'hover' | 'circleClick' | 'circleHover' | null | string;
+export type ViewStatus = 'DISPLAYED' | 'OBSCURED' | 'OUTSIDE' | 'HIDDEN';
+export type TriggerEventType = 'VIEW_CLICK' | 'VIEW_CHANGE';
+export type PositionType = 'static' | 'relative' | 'sticky' | 'absolute' | 'fixed';
+export type ListTagType = 'tr' | 'li' | 'dt' | 'dd';
+export type SupportedClickInputType = 'button' | 'reset' | 'submit' | 'file';
+export type SupportedChangeInputType = 'checkbox' | 'color' | 'radio' | 'range' | 'date' | 'datetime-local' | 'email' | 'month' | 'number' | 'password' | 'text' | 'time' | 'week';
+export type GioAttributeType = 'data-growing-ignore' | 'data-growing-track' | 'data-growing-container' | 'data-growing-index' | 'data-growing-title';
+export type SpecialTagType = 'circle-shape' | 'circle-page' | 'heatmap-page';
 export interface DeviceInfo {
     scale: number;
     winWidth: number;
@@ -16,6 +27,29 @@ export interface Rect {
     left: number;
     width: number;
     height: number;
+}
+export interface XPathResult {
+    skeleton: string;
+    fullXpath: string;
+    xcontent: string;
+}
+export interface TrackingConfig {
+    ignoreDisplay?: boolean;
+    includeChildren?: boolean;
+    maxDepth?: number;
+    filter?: (element: Element) => boolean;
+}
+export interface GioError {
+    code: string;
+    message: string;
+    details?: Record<string, unknown>;
+    element?: Element;
+}
+export interface GioWebNodeOptions {
+    action?: ACTIONTYPES;
+    lengthThreshold?: number;
+    deviceInfo?: DeviceInfo;
+    parentNode?: XNODE;
 }
 export interface XNODE {
     originNode: Node;
@@ -36,8 +70,8 @@ export interface XNODE {
     isOutFlow: boolean;
     rect?: Rect;
     zLevel?: number;
-    viewStatus?: keyof typeof import('./utils/constant').VIEW_STATUS;
-    triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
+    viewStatus?: ViewStatus;
+    triggerEvent: TriggerEventType;
     isTrackable?: boolean;
     isUpgrade?: boolean;
 }
@@ -46,12 +80,12 @@ export interface GIOWEBNODEINFO {
     fullXpath: string;
     skeleton: string;
     xcontent: string;
-    triggerEvent: 'VIEW_CLICK' | 'VIEW_CHANGE';
+    triggerEvent: TriggerEventType;
     originNode: Node;
     content?: Possible<string>;
     index?: Possible<number>;
     hyperlink?: Possible<string>;
-    peerNodes?: Possible<any[]>;
+    peerNodes?: Possible<Element[]>;
 }
 export interface GIOHYBRIDNODEINFO extends GIOWEBNODEINFO {
     top: number;
@@ -62,6 +96,9 @@ export interface GIOHYBRIDNODEINFO extends GIOWEBNODEINFO {
     outFlow: boolean;
     href?: Possible<string>;
     parentXPath?: Possible<string>;
+    isPseudoList?: boolean;
+    isPureList?: boolean;
+    isContainer?: boolean;
 }
 export interface GIOWEBNODE {
     originElement: Element;
@@ -72,11 +109,11 @@ export interface GIOWEBNODE {
     isUpgrade: boolean;
     trackNodes: () => GIOWEBNODEINFO[];
     getGioNodeInfo: (node: XNODE) => GIOWEBNODEINFO;
-    computeXpath: (xNode: XNODE) => any;
+    computeXpath: (xNode: XNODE) => XPathResult;
 }
 export interface GIOHYBRIDNODE {
-    deviceInfo: any;
+    deviceInfo: DeviceInfo;
     xpathThreshold: number;
     xNode: XNODE;
-    trackNodes: (target: Element, parentInfo: any, ignoreDisplay: boolean) => GIOHYBRIDNODEINFO[];
+    trackNodes: (target: Element, parentInfo: XNODE | null, ignoreDisplay: boolean) => GIOHYBRIDNODEINFO[];
 }
