@@ -1,19 +1,12 @@
-import { DeviceInfo, GIOHYBRIDNODEINFO, XNODE } from './typings';
+import { DeviceInfo, XNODE } from './typings';
 declare class GioHybridNode {
     xNode: XNODE;
     deviceInfo: DeviceInfo;
     xpathThreshold: number;
     private elements;
     private _processedNodes;
-    constructor(webviewInfo: {
-        webviewLeft: number;
-        webviewTop: number;
-        webviewWidth: number;
-        webviewHeight: number;
-        webviewZLevel: number;
-        isLimitViewport?: boolean;
-    }, lengthThreshold?: number);
-    trackNodes: (target: Element, parentInfo: XNODE | null, ignoreDisplay?: boolean) => GIOHYBRIDNODEINFO[];
+    constructor(webviewInfo: any, lengthThreshold?: number);
+    trackNodes: (target: Element, parentNodes?: XNODE[] | XNODE, ignoreDisplay?: boolean) => any[];
     private _shouldProcessNode;
     private _getTrackElements;
     private static getPositionZLevelIncrement;

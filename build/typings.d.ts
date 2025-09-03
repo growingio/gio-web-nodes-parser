@@ -53,25 +53,26 @@ export interface GioWebNodeOptions {
 }
 export interface XNODE {
     originNode: Node;
-    index: number;
+    index?: number;
+    isMarkedIndex: boolean;
     tagName: string;
-    id: string;
-    classList: string[];
-    content: Possible<string>;
-    hyperlink: Possible<string>;
-    currentXpath: string;
-    isIgnored: boolean;
-    isPseudoList: boolean;
-    isPureList: boolean;
-    isContainer: boolean;
-    isLimitViewport: boolean;
-    peerNodes: Element[];
-    xParents: XNODE[];
-    isOutFlow: boolean;
+    id?: string;
+    classList?: string[];
+    content?: Possible<string>;
+    hyperlink?: Possible<string>;
+    currentXpath?: string;
+    isIgnored?: boolean;
+    isPseudoList?: boolean;
+    isPureList?: boolean;
+    isContainer?: boolean;
+    isLimitViewport?: boolean;
+    peerNodes?: Element[];
+    xParents?: XNODE[];
+    isOutFlow?: boolean;
     rect?: Rect;
     zLevel?: number;
     viewStatus?: ViewStatus;
-    triggerEvent: TriggerEventType;
+    triggerEvent?: TriggerEventType;
     isTrackable?: boolean;
     isUpgrade?: boolean;
 }
@@ -84,8 +85,12 @@ export interface GIOWEBNODEINFO {
     originNode: Node;
     content?: Possible<string>;
     index?: Possible<number>;
+    isMarkedIndex: boolean;
     hyperlink?: Possible<string>;
     peerNodes?: Possible<Element[]>;
+    isPseudoList?: boolean;
+    isPureList?: boolean;
+    isContainer?: boolean;
 }
 export interface GIOHYBRIDNODEINFO extends GIOWEBNODEINFO {
     top: number;
@@ -95,10 +100,6 @@ export interface GIOHYBRIDNODEINFO extends GIOWEBNODEINFO {
     zLevel: number;
     outFlow: boolean;
     href?: Possible<string>;
-    parentXPath?: Possible<string>;
-    isPseudoList?: boolean;
-    isPureList?: boolean;
-    isContainer?: boolean;
 }
 export interface GIOWEBNODE {
     originElement: Element;
@@ -115,5 +116,5 @@ export interface GIOHYBRIDNODE {
     deviceInfo: DeviceInfo;
     xpathThreshold: number;
     xNode: XNODE;
-    trackNodes: (target: Element, parentInfo: XNODE | null, ignoreDisplay: boolean) => GIOHYBRIDNODEINFO[];
+    trackNodes: (target: Element, parentNodes: XNODE[], ignoreDisplay: boolean) => GIOHYBRIDNODEINFO[];
 }

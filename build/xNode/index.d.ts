@@ -1,12 +1,13 @@
 import { DeviceInfo, Possible, Rect, XNODE } from '@/typings';
 import { VIEW_STATUS } from '@/utils/constant';
 declare class xNode implements XNODE {
-    originNode: HTMLElement;
+    originNode: any;
     deviceInfo?: DeviceInfo;
     actionType?: string;
     isTrackable: boolean;
     parentNodes: XNODE[];
     index: number;
+    isMarkedIndex: boolean;
     tagName: string;
     id: string;
     classList: string[];
@@ -27,18 +28,13 @@ declare class xNode implements XNODE {
     zLevel: number;
     private _pureList;
     private _pseudoList;
-    constructor(originNode: HTMLElement, deviceInfo?: DeviceInfo, actionType?: string, isTrackable?: boolean, parentNodes?: XNODE[]);
+    constructor(originNode: any, deviceInfo?: DeviceInfo, actionType?: string, isTrackable?: boolean, parentNodes?: XNODE[]);
     private _checkGioIndex;
     private _getDlIndex;
     private _getListIndex;
     private _getIndex;
     private _isListNode;
     private _getIsPureList;
-    private _getGlobalListNodes;
-    private _findListContainer;
-    private _isLikelyListContainer;
-    private _isValidGlobalListItem;
-    private _getNodeDepth;
     private _getIsPseudoList;
     private _findLongestUniformSequence;
     private _updateMaxSequenceIfBetter;
