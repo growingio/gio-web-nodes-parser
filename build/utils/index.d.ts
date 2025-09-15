@@ -16,3 +16,4 @@ export declare const isSecondLeafNode: (node: Possible<Element>) => boolean;
 export declare const isIconNode: (node: Possible<Element>) => boolean;
 export declare const getDirectText: (node: Possible<Element>) => string;
 export declare const processText: (text: Possible<string>, length?: number) => Possible<string>;
+export declare const isChangeableInput: (node: Possible<Element>, actionType: string) => boolean;

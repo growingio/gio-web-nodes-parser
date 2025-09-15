@@ -29,6 +29,7 @@ declare class xNode implements XNODE {
     private _pureList;
     private _pseudoList;
     constructor(originNode: any, deviceInfo?: DeviceInfo, actionType?: string, isTrackable?: boolean, parentNodes?: XNODE[]);
+    private _warn;
     private _checkGioIndex;
     private _getDlIndex;
     private _getListIndex;
