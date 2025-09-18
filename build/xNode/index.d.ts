@@ -6,6 +6,7 @@ declare class xNode implements XNODE {
     actionType?: string;
     isTrackable: boolean;
     parentNodes: XNODE[];
+    silentMode: boolean;
     index: number;
     isMarkedIndex: boolean;
     tagName: string;
@@ -28,7 +29,7 @@ declare class xNode implements XNODE {
     zLevel: number;
     private _pureList;
     private _pseudoList;
-    constructor(originNode: any, deviceInfo?: DeviceInfo, actionType?: string, isTrackable?: boolean, parentNodes?: XNODE[]);
+    constructor(originNode: any, deviceInfo?: DeviceInfo, actionType?: string, isTrackable?: boolean, parentNodes?: XNODE[], silentMode?: boolean);
     private _warn;
     private _checkGioIndex;
     private _getDlIndex;

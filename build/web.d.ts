@@ -5,13 +5,14 @@ declare class GioWebNode {
     lengthThreshold?: number;
     deviceInfo?: DeviceInfo;
     parentNode?: GioWebNode;
+    silentMode: boolean;
     originElement: Element;
     actionType: ACTIONTYPES;
     xpathThreshold: number;
     isTrackable: boolean;
     isUpgrade: boolean;
     xNode: XNODE;
-    constructor(origin: Element | any, action?: ACTIONTYPES, lengthThreshold?: number, deviceInfo?: DeviceInfo, parentNode?: GioWebNode);
+    constructor(origin: Element | any, action?: ACTIONTYPES, lengthThreshold?: number, deviceInfo?: DeviceInfo, parentNode?: GioWebNode, silentMode?: boolean);
     private updateNodesIndex;
     trackNodes: () => GIOWEBNODEINFO[];
     private static nodeInfoCache;
