@@ -19,3 +19,5 @@ export declare function typeOf(o: any): string;
 export declare function assign(target: any, ...sources: any[]): any;
 export declare function values(o: any): any[];
 export declare function entries(o: any): [string, any][];
+export declare function startsWith(str: string, searchString: string, position?: number): boolean;
+export declare function endsWith(str: string, searchString: string, length?: number): boolean;
